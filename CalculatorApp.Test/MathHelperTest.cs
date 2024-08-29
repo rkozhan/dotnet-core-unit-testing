@@ -60,9 +60,18 @@ namespace CalculatorApp.Test
             Assert.Equal(expectedValue, result);
         }
 
-        [Theory]
+        [Theory(Skip = "This is just a reason...")]  // to skip the test
         [MemberData(nameof(MathFormulas.Data), MemberType = typeof(MathFormulas))]
         public void Add_MemberData_Test(int x, int y, int expectedValue)
+        {
+            var calculator = new MathFormulas();
+            var result = calculator.Add(x, y);
+            Assert.Equal(expectedValue, result);
+        }
+
+        [Theory]
+        [ClassData(typeof(MathFormulas))]
+        public void Add_ClassData_Test(int x, int y, int expectedValue)
         {
             var calculator = new MathFormulas();
             var result = calculator.Add(x, y);
