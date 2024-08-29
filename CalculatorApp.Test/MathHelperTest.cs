@@ -27,7 +27,17 @@ namespace CalculatorApp.Test
         {
             var calculator = new MathFormulas();
             var result = calculator.Diff(x, y);
-            Assert.Equal(result, expectedValue);
+            Assert.Equal(expectedValue, result);
+        }
+
+        [Theory]
+        [InlineData(1, 2, 3)]
+        [InlineData(-4, -6, -10)]
+        public void AddTest(int x, int y, int expectedValue)
+        {
+            var calculator = new MathFormulas();
+            var result = calculator.Add(x, y);
+            Assert.Equal(expectedValue, result);
         }
 
         [Theory]
@@ -37,7 +47,26 @@ namespace CalculatorApp.Test
         {
             var calculatot = new MathFormulas();
             var result = calculatot.Sum(values);
-            Assert.Equal(result, expectedValue);
+            Assert.Equal(expectedValue, result);
+        }
+
+        [Theory]
+        [InlineData(new int[3] { 1, 2, 3 }, 2)]
+        [InlineData(new int[3] { -4, -6, -10 }, -6)]
+        public void AverageTest(int[] values, int expectedValue)
+        {
+            var calculatot = new MathFormulas();
+            var result = calculatot.Average(values);
+            Assert.Equal(expectedValue, result);
+        }
+
+        [Theory]
+        [MemberData(nameof(MathFormulas.Data), MemberType = typeof(MathFormulas))]
+        public void Add_MemberData_Test(int x, int y, int expectedValue)
+        {
+            var calculator = new MathFormulas();
+            var result = calculator.Add(x, y);
+            Assert.Equal(expectedValue, result);
         }
     }
 }
